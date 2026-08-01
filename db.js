@@ -24,6 +24,7 @@ const inicializarDB = async()=>{
             precio DECIMAL(10,2) NOT NULL,
             stock INT NOT NULL);`);
         
+        
         console.log('Base de datos iniciada');
     }catch(error){
         console.error('Error al iniciar la base de datos', error);

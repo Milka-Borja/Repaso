@@ -1,4 +1,25 @@
 const db = require(`../db`);
+exports.registrar = async(req, res) =>{
+    const {nombre, email, password}= req.body;
+
+    if(!nombre || !email || !password){
+        return res.status(400).json({error:`Todos los campos son obligatorios`});
+    }
+    try{
+        const consulta = `INSERT INTO usuarios (nombre, email, password) VALUES ($1,$2,$3) RETURNING id, nombre, email`;
+        const resultado = await db.query(consulta,[nombre, email, password]);
+        res.status(201).json({
+            mensaje:`Usuario registrado correctamente`,
+            usuario: resultado.rows[0]
+        });
+
+    }catch(error){
+        if(error.code === `23505`){
+            return res.status(400).json({error:`El email ya esta registrado `});
+        }
+        res.status(500).json({error:`Erros al registrar el usuario`});
+    }
+};
 
 exports.login=async(req, res) =>{
     const {email, password} = req.body;
