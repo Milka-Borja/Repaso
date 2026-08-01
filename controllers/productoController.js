@@ -31,7 +31,7 @@ exports.actualizar= async(req,res)=>{
     const {nombre, codigo, precio, stock} = req.body;
 
     try{
-        const consulta = `UPDATE productos SET nombre=$1, codigo=$2, precio=$3, stock=$4 WHERE id=$5`,
+        const consulta = `UPDATE productos SET nombre=$1, codigo=$2, precio=$3, stock=$4 WHERE id=$5`;
         
         const resultado = await db.query(consulta,[nombre, codigo, precio, stock, id]); 
 
