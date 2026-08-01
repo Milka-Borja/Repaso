@@ -18,7 +18,7 @@ const inicializarDB = async()=>{
         await pool.query(`INSERT INTO usuarios (nombre, email, password) VALUES ('Admin','admin@gmail.com','admin123') ON CONFLICT (email) DO NOTHING;`);
         
         await pool.query(`CREATE TABLE IF NOT EXISTS productos (
-            id SERIAL PRIMARY KEY),
+            id SERIAL PRIMARY KEY,
             nombre VARCHAR(100) NOT NULL,
             codigo VARCHAR(50) NOT NULL,
             precio DECIMAL(10,2) NOT NULL,
