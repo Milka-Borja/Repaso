@@ -24,7 +24,14 @@ const inicializarDB = async()=>{
             precio DECIMAL(10,2) NOT NULL,
             stock INT NOT NULL);`);
         
-        
+        await pool.query(`CREATE TABLE IF NOT EXISTS pedidos (
+            id SERIAL PRIMARY KEY,
+            usuario_id INT REFERENCES usuarios(id) ON DELETE CASCADE,
+            producto_id INT REFERENCES productos(id) ON DELETE CASCADE,
+            cantidad INT NOT NULL,
+            total DECIMAL(10,2) NOT NULL,
+            fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP);`);
+            
         console.log('Base de datos iniciada');
     }catch(error){
         console.error('Error al iniciar la base de datos', error);
